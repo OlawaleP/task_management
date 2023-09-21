@@ -5,15 +5,16 @@ const jwtsecret = process.env.JWT_SECRET as string;
 
 export async function auth (req: Request | any, res: Response, next: NextFunction){
     try {
-        const authorization = req.headers.authorization;
-        // const authorization = req.cookies.jwt;
+        // const authorization = req.headers.authorization;
+        const authorization = req.cookies.token;
 
         if(!authorization) {
             return res.status(401).json({error: "Kindly sign in as a user"})
         }
 
-        const token = authorization.slice(7, authorization.length);
-        let verified = jwt.verify( token, jwtsecret );
+        // const token = authorization.slice(7, authorization.length);
+
+        let verified = jwt.verify( authorization, jwtsecret );
 
         if (!verified) {
             return res.status(401).json({error: "token invalid, you can't access this route"})

@@ -19,7 +19,6 @@ TodoInstance.init({
     description: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
     },
     completed: {
         type: DataTypes.BOOLEAN,
