@@ -4,36 +4,36 @@ import { TodoInstance } from '../model/todoModel';
 import { UserInstance } from '../model/userModel';
 import { createTodoSchema, options, updateTodoSchema } from '../utils/utils';
 
-export const CreateTodo = async ( req: Request | any, res: Response ) => {
-    try {
-        const verified = req.user;
-        const id = uuidv4();
-        // const { description, completed } = req.body;
+// export const CreateTodo = async ( req: Request | any, res: Response ) => {
+//     try {
+//         const verified = req.user;
+//         const id = uuidv4();
+//         // const { description, completed } = req.body;
 
-        const validationResult = createTodoSchema.validate(req.body, options);
+//         const validationResult = createTodoSchema.validate(req.body, options);
 
-        if(validationResult.error) {
-          return res.status(400).json({
-            Error: validationResult.error.details[0].message
-          });
-        }
+//         if(validationResult.error) {
+//           return res.status(400).json({
+//             Error: validationResult.error.details[0].message
+//           });
+//         }
     
 
-        const todoRecord = await TodoInstance.create({
-            id,
-            ...req.body,
-            userId: verified.id
-        })
+//         const todoRecord = await TodoInstance.create({
+//             id,
+//             ...req.body,
+//             userId: verified.id
+//         })
 
-        return res.status(201).json({
-            msg: "You have successfully created a todo",
-            todoRecord
-        })
+//         return res.status(201).json({
+//             msg: "You have successfully created a todo",
+//             todoRecord
+//         })
         
-    } catch (error) {
-        console.log(error)
-    }
-}
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
 
 export const getTodos = async (req: Request, res:Response) => {
     try {
